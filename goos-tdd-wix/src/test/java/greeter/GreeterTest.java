@@ -9,7 +9,7 @@ class GreeterTest {
     @Test
     void shouldGreetByName() {
         Greeter greeter = new Greeter();
-        String response = greeter.greet("Miguel");
+        String response = greeter.greet("name=Miguel");
         assertEquals("Hello, Miguel!", response);
     }
 
