@@ -1,6 +1,7 @@
 package greeter;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,9 +22,13 @@ public class GreetingServerE2ETest {
         GreetingServer.main();
     }
 
+    @BeforeEach
+    public void reset() {
+        FakeTimeServer.hourOfDay = "9";
+    }
+
     @Test
     public void shouldGreetWithHelloWorld() throws InterruptedException, IOException {
-        FakeTimeServer.hourOfDay = "9";
         HttpResponse<String> response = sendHttpRequest("http://localhost:8080/greeting");
         String responseBody = response.body();
 
@@ -34,7 +39,6 @@ public class GreetingServerE2ETest {
     @ParameterizedTest
     @ValueSource(strings = {"Miguel", "Mike"})
     public void shouldGreetByName(String name) throws IOException, InterruptedException {
-        FakeTimeServer.hourOfDay = "9";
         HttpResponse<String> response = sendHttpRequest("http://localhost:8080/greeting?name=" + name);
         String responseBody = response.body();
 

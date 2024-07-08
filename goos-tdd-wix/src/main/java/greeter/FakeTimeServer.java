@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 
-public class FakeTimeServer {
+public class FakeTimeServer implements TimeServer{
     final HttpServer server = HttpServer.create(new InetSocketAddress(8081), 0);
     public static String hourOfDay = "9";
 

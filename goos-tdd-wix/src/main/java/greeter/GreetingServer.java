@@ -13,7 +13,7 @@ import java.net.http.HttpResponse;
 public class GreetingServer {
     public static void main(String... args) throws IOException {
         final HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-        FakeTimeServer timeServer = new FakeTimeServer();
+        TimeServer timeServer = new FakeTimeServer();
         server.createContext("/greeting", handler -> {
 
             String hourOfDay = "";
