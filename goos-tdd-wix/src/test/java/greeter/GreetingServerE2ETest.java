@@ -1,5 +1,6 @@
 package greeter;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -13,9 +14,13 @@ import static org.hamcrest.Matchers.is;
 
 public class GreetingServerE2ETest {
 
-    @Test
-    public void shouldGreetWithHelloWorld() throws IOException, InterruptedException {
+    @BeforeAll
+    public static void setUp() throws IOException {
         GreetingServer.main();
+    }
+
+    @Test
+    public void shouldGreetWithHelloWorld() throws InterruptedException, IOException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/greeting"))
@@ -25,5 +30,18 @@ public class GreetingServerE2ETest {
         String responseBody = response.body();
 
         assertThat(responseBody, is("Hello, World!"));
+    }
+
+    @Test
+    public void shouldGreetByName() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/greeting?name=Miguel"))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String responseBody = response.body();
+
+        assertThat(responseBody, is("Hello, Miguel!"));
     }
 }
