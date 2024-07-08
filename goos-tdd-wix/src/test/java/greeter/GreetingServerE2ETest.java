@@ -32,6 +32,7 @@ public class GreetingServerE2ETest {
         String responseBody = response.body();
 
         assertThat(responseBody, is("Hello, World!"));
+        assertThat(response.statusCode(), is(200));
     }
 
     @ParameterizedTest
@@ -46,5 +47,6 @@ public class GreetingServerE2ETest {
         String responseBody = response.body();
 
         assertThat(responseBody, is("Hello, " + name + "!"));
+        assertThat(response.statusCode(), is(200));
     }
 }
