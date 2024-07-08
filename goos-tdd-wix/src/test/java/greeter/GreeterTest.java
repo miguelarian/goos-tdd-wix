@@ -2,6 +2,8 @@ package greeter;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GreeterTest {
@@ -9,14 +11,18 @@ class GreeterTest {
     @Test
     void shouldGreetByName() {
         Greeter greeter = new Greeter();
+
         String response = greeter.greet("name=Miguel");
-        assertEquals("Hello, Miguel!", response);
+
+        assertThat(response, is("Hello, Miguel!"));
     }
 
     @Test
     void shouldGreetsWithHelloWorld() {
         Greeter greeter = new Greeter();
+
         String response = greeter.greet(null);
-        assertEquals("Hello, World!", response);
+
+        assertThat(response, is("Hello, World!"));
     }
 }
