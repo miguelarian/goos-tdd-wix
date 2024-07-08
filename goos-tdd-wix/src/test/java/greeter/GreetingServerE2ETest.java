@@ -36,7 +36,7 @@ public class GreetingServerE2ETest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"Miguel"})
+    @ValueSource(strings = {"Miguel", "Mike"})
     public void shouldGreetByName(String name) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
