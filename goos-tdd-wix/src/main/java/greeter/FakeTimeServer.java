@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 
-public class TimeServer {
+public class FakeTimeServer {
     final HttpServer server = HttpServer.create(new InetSocketAddress(8081), 0);
     public static String hourOfDay = "9";
 
-    public TimeServer() throws IOException {
+    public FakeTimeServer() throws IOException {
         server.createContext("/hourOfDay", handler -> {
             String response = hourOfDay;
             handler.sendResponseHeaders(200, response.length());

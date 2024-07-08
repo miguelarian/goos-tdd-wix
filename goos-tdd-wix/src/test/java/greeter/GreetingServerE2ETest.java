@@ -23,7 +23,7 @@ public class GreetingServerE2ETest {
 
     @Test
     public void shouldGreetWithHelloWorld() throws InterruptedException, IOException {
-        TimeServer.hourOfDay = "9";
+        FakeTimeServer.hourOfDay = "9";
         HttpResponse<String> response = sendHttpRequest("http://localhost:8080/greeting");
         String responseBody = response.body();
 
@@ -34,7 +34,7 @@ public class GreetingServerE2ETest {
     @ParameterizedTest
     @ValueSource(strings = {"Miguel", "Mike"})
     public void shouldGreetByName(String name) throws IOException, InterruptedException {
-        TimeServer.hourOfDay = "9";
+        FakeTimeServer.hourOfDay = "9";
         HttpResponse<String> response = sendHttpRequest("http://localhost:8080/greeting?name=" + name);
         String responseBody = response.body();
 
@@ -44,7 +44,7 @@ public class GreetingServerE2ETest {
 
     @Test
     public void shouldSleepAt14() throws IOException, InterruptedException {
-        TimeServer.hourOfDay = "14";
+        FakeTimeServer.hourOfDay = "14";
         HttpResponse<String> response = sendHttpRequest("http://localhost:8080/greeting");
         String responseBody = response.body();
 
