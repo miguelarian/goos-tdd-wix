@@ -2,6 +2,8 @@ package greeter;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.net.URI;
@@ -32,16 +34,17 @@ public class GreetingServerE2ETest {
         assertThat(responseBody, is("Hello, World!"));
     }
 
-    @Test
-    public void shouldGreetByName() throws IOException, InterruptedException {
+    @ParameterizedTest
+    @ValueSource(strings = {"Miguel"})
+    public void shouldGreetByName(String name) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/greeting?name=Miguel"))
+                .uri(URI.create("http://localhost:8080/greeting?name=" + name))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String responseBody = response.body();
 
-        assertThat(responseBody, is("Hello, Miguel!"));
+        assertThat(responseBody, is("Hello, " + name + "!"));
     }
 }
