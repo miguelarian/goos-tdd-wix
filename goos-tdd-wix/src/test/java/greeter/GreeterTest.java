@@ -8,12 +8,13 @@ import static org.hamcrest.Matchers.is;
 class GreeterTest {
 
     final String NO_NAME_GREET = "Hello, World!";
+    final String hourOfDay = "9";
 
     @Test
     void shouldGreetByName() {
         Greeter greeter = new Greeter();
 
-        String response = greeter.greet("name=Miguel");
+        String response = greeter.greet("name=Miguel", hourOfDay);
 
         assertThat(response, is("Hello, Miguel!"));
     }
@@ -22,7 +23,7 @@ class GreeterTest {
     void shouldGreetsWithHelloWorld() {
         Greeter greeter = new Greeter();
 
-        String response = greeter.greet(null);
+        String response = greeter.greet(null, hourOfDay);
 
         assertThat(response, is(NO_NAME_GREET));
     }
@@ -31,7 +32,7 @@ class GreeterTest {
     void shouldNotGreetWithInvalidQuery() {
         Greeter greeter = new Greeter();
 
-        String response = greeter.greet("invalidQuery");
+        String response = greeter.greet("invalidQuery", hourOfDay);
 
         assertThat(response, is(NO_NAME_GREET));
     }

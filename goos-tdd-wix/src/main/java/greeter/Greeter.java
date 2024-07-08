@@ -5,7 +5,11 @@ public class Greeter {
     private final String NO_NAME_GREET = "Hello, World!";
     private final String NAME_PARAM = "name";
 
-    public String greet(String query) {
+    public String greet(String query, String hourOfDay) {
+
+        if(hourOfDay.equals("14")) {
+            return "zzz";
+        }
 
         if(query == null) {
             return NO_NAME_GREET;
