@@ -20,9 +20,10 @@ class GreeterTest {
     @Test
     void shouldGreetsWithHelloWorld() {
         Greeter greeter = new Greeter();
+        final String NO_NAME_GREET = "Hello, World!";
 
         String response = greeter.greet(null);
 
-        assertThat(response, is("Hello, World!"));
+        assertThat(response, is(NO_NAME_GREET));
     }
 }
