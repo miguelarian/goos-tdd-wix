@@ -3,6 +3,7 @@ package greeter;
 public class Greeter {
 
     private final String NO_NAME_GREET = "Hello, World!";
+    private final String NAME_PARAM = "name";
 
     public String greet(String query) {
 
@@ -15,10 +16,10 @@ public class Greeter {
             return NO_NAME_GREET;
         }
 
-        if(queryParam.length == 2 && queryParam[0].toLowerCase().equals("name")) {
-            return "Hello, " + queryParam[1] + "!";
+        if(!queryParam[0].toLowerCase().equals(NAME_PARAM)) {
+            return NO_NAME_GREET;
         }
 
-        return null;
+        return "Hello, " + queryParam[1] + "!";
     }
 }
