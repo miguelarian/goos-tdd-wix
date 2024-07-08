@@ -2,23 +2,23 @@ package greeter;
 
 public class Greeter {
 
+    private final String NO_NAME_GREET = "Hello, World!";
+
     public String greet(String query) {
-        String response = "";
 
         if(query == null) {
-            response = "Hello, World!";
-            return response;
+            return NO_NAME_GREET;
         }
 
         String[] queryParam = query.split("=");
         if(queryParam.length != 2) {
-            return response;
+            return NO_NAME_GREET;
         }
 
         if(queryParam.length == 2 && queryParam[0].toLowerCase().equals("name")) {
-            response = "Hello, " + queryParam[1] + "!";
+            return "Hello, " + queryParam[1] + "!";
         }
 
-        return response;
+        return null;
     }
 }
