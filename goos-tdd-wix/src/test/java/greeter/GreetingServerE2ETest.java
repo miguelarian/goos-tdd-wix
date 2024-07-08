@@ -23,12 +23,7 @@ public class GreetingServerE2ETest {
 
     @Test
     public void shouldGreetWithHelloWorld() throws InterruptedException, IOException {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/greeting"))
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = sendHttpRequest("http://localhost:8080/greeting");
         String responseBody = response.body();
 
         assertThat(responseBody, is("Hello, World!"));
@@ -38,15 +33,20 @@ public class GreetingServerE2ETest {
     @ParameterizedTest
     @ValueSource(strings = {"Miguel", "Mike"})
     public void shouldGreetByName(String name) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/greeting?name=" + name))
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = sendHttpRequest("http://localhost:8080/greeting?name=" + name);
         String responseBody = response.body();
 
         assertThat(responseBody, is("Hello, " + name + "!"));
         assertThat(response.statusCode(), is(200));
+    }
+
+    private static HttpResponse<String> sendHttpRequest(String name) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(name))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response;
     }
 }
