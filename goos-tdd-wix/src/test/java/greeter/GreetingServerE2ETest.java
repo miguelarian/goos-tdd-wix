@@ -24,7 +24,7 @@ public class GreetingServerE2ETest {
 
     @BeforeEach
     public void reset() {
-        FakeTimeServer.hourOfDay = "9";
+        FakeTimeServer.assumingHourOfDay(9);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class GreetingServerE2ETest {
 
     @Test
     public void shouldSleepAt14() throws IOException, InterruptedException {
-        FakeTimeServer.hourOfDay = "14";
+        FakeTimeServer.assumingHourOfDay(14);
         HttpResponse<String> response = sendHttpRequest("http://localhost:8080/greeting");
         String responseBody = response.body();
 
